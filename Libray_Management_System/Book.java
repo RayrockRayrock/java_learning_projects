@@ -9,4 +9,7 @@ public class Book{
     this.have = true;
   }
 
+  public String get_book_name(){
+    return book_name;
+  }
 }

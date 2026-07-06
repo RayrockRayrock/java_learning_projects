@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Main{
   static ArrayList<Book> books = new ArrayList<>();
   static Scanner scanner = new Scanner(System.in);
+  static ArrayList<Book> borrowed_books = new ArrayList<>();
 
 
   public static void main(String[] args){
@@ -22,6 +23,10 @@ public class Main{
           break;
         case 2:
           borrow_book();
+          break;
+        // case 3:
+        //   return_book();
+
 
         case 5:
           running = false;
@@ -42,16 +47,29 @@ public class Main{
   }
 
   public static void add_book(){
-    System.out.printf("What book you want to add(type the name): ");
+    System.out.printf("Book name: ");
     String book_name = scanner.nextLine();
-    System.out.printf("What the author name (type the author name): ");
+    System.out.printf("Author name: ");
     String author_name = scanner.nextLine();
     books.add(new Book(author_name, book_name));
   }
 
   public static void borrow_book(){
-    System.out.printf("Enter the name of the book your want to borrow: ");
-    String book_name = scanner.nextLine();
+    System.out.printf("Book name: ");
+    String target_book = scanner.nextLine();
+    for (int i = 0; i < books.size(); i++)
+    {
+      if (target_book.equalsIgnoreCase(books.get(i).get_book_name()))
+      {
+        borrowed_books.add(books.remove(i));
+        System.out.println("You borrow " + target_book + " from the libray");
+        return;
+
+      }
+
+    }
+
+    System.out.println(target_book + " is not in libray");
   }
 
   public static void print_message(){
