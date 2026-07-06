@@ -24,8 +24,9 @@ public class Main{
         case 2:
           borrow_book();
           break;
-        // case 3:
-        //   return_book();
+        case 3:
+          return_book();
+          break;
 
 
         case 5:
@@ -52,6 +53,7 @@ public class Main{
     System.out.printf("Author name: ");
     String author_name = scanner.nextLine();
     books.add(new Book(author_name, book_name));
+    System.out.println("You add "+book_name+" to the libray");
   }
 
   public static void borrow_book(){
@@ -71,6 +73,24 @@ public class Main{
 
     System.out.println(target_book + " is not in libray");
   }
+
+
+  public static void return_book(){
+    System.out.print("Book name: ");
+    String target_book = scanner.nextLine();
+    for (int i = 0; i < borrowed_books.size(); i++)
+    {
+      if (target_book.equalsIgnoreCase(borrowed_books.get(i).get_book_name()))
+      {
+        books.add(borrowed_books.remove(i));
+        System.out.println("You return "+ target_book + " to the libray");
+        return;
+      }
+    }
+    System.out.println(target_book + " has not been borrow yet");
+  }
+
+
 
   public static void print_message(){
     System.out.println("Libray Management System");
