@@ -28,6 +28,10 @@ public class Main{
           return_book();
           break;
 
+        case 4:
+          list_books();
+          break;
+
 
         case 5:
           running = false;
@@ -40,6 +44,11 @@ public class Main{
           break;
       }
 
+      try{
+        Thread.sleep(5000);
+      }catch(InterruptedException e){
+        e.printStackTrace();
+      }
 
     }
   
@@ -91,8 +100,44 @@ public class Main{
   }
 
 
+  public static void list_books(){
+    System.out.println("1.Books in libray");
+    System.out.println("2.Books that had been borrowed");
+    System.out.printf(": ");
+    int input = scanner.nextInt();
+    scanner.nextLine();
+    switch (input) {
+      case 1:
+        if (books.size() == 0){
+          System.out.println("There is no book yet");
+          return;
+        }
+        for (int i = 0; i < books.size(); i++){
+          System.out.println(books.get(i).get_book_name() + " by " + books.get(i).get_author_name());
+
+        }
+        break;
+      case 2:
+        if (borrowed_books.size() == 0){
+          System.out.println("There is no book yet");
+          return;
+        }
+        for (int i = 0; i < borrowed_books.size(); i++){
+          System.out.println(borrowed_books.get(i).get_book_name() + " by " + borrowed_books.get(i).get_author_name());
+
+        }
+        break;
+
+      default:
+        System.out.println("Choose 1 or 2");
+        break;
+    }
+  }
+
 
   public static void print_message(){
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
     System.out.println("Libray Management System");
     System.out.println("1.Add book");
     System.out.println("2.Borrow book");

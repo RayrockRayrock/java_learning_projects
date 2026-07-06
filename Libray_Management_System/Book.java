@@ -12,4 +12,7 @@ public class Book{
   public String get_book_name(){
     return book_name;
   }
+  public String get_author_name(){
+    return author_name;
+  }
 }
