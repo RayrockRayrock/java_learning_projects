@@ -14,6 +14,14 @@ public class Main{
     chooseCharacter();
     confirmCharacter(characterChoice);
     printCharacterInfo();
+    try{
+    Thread.sleep(2000);
+    }
+    catch (InterruptedException e){
+      System.out.println(e);
+    }
+    meetEnemey("N-Daguva-Zeba");
+    
 
 
 
@@ -59,6 +67,10 @@ public class Main{
       System.out.println("You choosed " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
+    }
+    public static void meetEnemey(String enemeyName){
+      System.out.println("You encounter " + enemeyName);
+
     }
 }
 
