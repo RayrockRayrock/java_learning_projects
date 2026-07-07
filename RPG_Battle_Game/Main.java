@@ -1,5 +1,7 @@
 import java.util.Scanner;
-import java.util.ArrayList;
+
+
+
 
 
 public class Main{
@@ -8,6 +10,7 @@ public class Main{
   static Scanner scanner = new Scanner(System.in);
   static int characterChoice = 0;
   static Character player;
+  static Character enemey;
   public static void main(String[] args){
 
     welcomeMessage();
@@ -20,7 +23,7 @@ public class Main{
     catch (InterruptedException e){
       System.out.println(e);
     }
-    meetEnemey("N-Daguva-Zeba");
+    meetEnemey("N-Daguva-Zeba", 1000, 20);
     fightOrFlight("N-Daguva-Zeba");
     
 
@@ -70,8 +73,9 @@ public class Main{
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
     }
-    public static void meetEnemey(String enemeyName){
+    public static void meetEnemey(String enemeyName, int enemeyHP, int enemyAttack){
       System.out.println("You encounter " + enemeyName);
+      enemey = new Character(enemeyName, enemeyHP, enemyAttack);
     }
     public static void fightOrFlight(String enemeyName){
       characterChoice = 0;
@@ -85,6 +89,11 @@ public class Main{
         switch (characterChoice) {
         case 1:
           System.out.println("You choose to fight " + enemeyName);
+          try {
+            Thread.sleep(2000);
+          } catch (Exception e) {
+            System.out.println(e);
+          }
           printCharacterInfo();
           printEnemeyInfo();
           
@@ -97,6 +106,9 @@ public class Main{
     }
     public static void printEnemeyInfo()
     {
+      System.out.println("Enemy" + enemey.getName());
+      System.out.println("HP: " + enemey.getHp());
+      System.out.println("Attack: " + enemey.getAttack());
 
     }
 }
