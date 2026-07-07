@@ -69,12 +69,12 @@ public class Main{
       System.out.println("You: " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
-      characterChoice = 0;
     }
     public static void meetEnemey(String enemeyName){
       System.out.println("You encounter " + enemeyName);
     }
     public static void fightOrFlight(String enemeyName){
+      characterChoice = 0;
       while (characterChoice != 1 && characterChoice != 2) {
         
         System.out.println("1.Fight");
