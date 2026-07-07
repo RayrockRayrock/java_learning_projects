@@ -54,7 +54,8 @@ public class Main{
       }
     }
     public static void printCharacterInfo(){
-
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
       System.out.println("You choosed " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
