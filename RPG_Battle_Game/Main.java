@@ -11,11 +11,14 @@ public class Main{
   static int characterChoice = 0;
   static Character player;
   static Character enemey;
+  static boolean blockPass;
   public static void main(String[] args){
 
     welcomeMessage();
     chooseCharacter();
     confirmCharacter(characterChoice);
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
     printCharacterInfo();
     try{
     Thread.sleep(2000);
@@ -23,14 +26,22 @@ public class Main{
     catch (InterruptedException e){
       System.out.println(e);
     }
-    meetEnemey("N-Daguva-Zeba", 1000, 20, 50);
-    fightOrFlight("N-Daguva-Zeba");
+    meetEnemey("N-Daguva-Zeba", 2000, 20, 50);
+    fightOrFlight(enemey.getName());
+    try{
+    Thread.sleep(2000);
+    }
+    catch (InterruptedException e){
+      System.out.println(e);
+    }
+    // meetEnemey("", enemeyHP, enemyAttack, enemySpeed);
     
 
 
 
 
 
+    scanner.close();
   }
     public static void welcomeMessage(){
     System.out.print("\033[H\033[2J");
@@ -53,13 +64,13 @@ public class Main{
     public static void confirmCharacter(int characterChoice){
       switch (characterChoice) {
         case 1:
-          player = new Character("Iroha", 100, 20, 50);
+          player = new Character("Iroha", 1000, 20, 50);
           break;
         case 2:
-          player = new Character("Kaguya", 200, 10, 20);
+          player = new Character("Kaguya", 2000, 10, 20);
           break;
         case 3:
-          player = new Character("Yachiyo", 50, 50, 100);
+          player = new Character("Yachiyo", 1500, 50, 100);
           break;
 
         default:
@@ -67,8 +78,6 @@ public class Main{
       }
     }
     public static void printCharacterInfo(){
-      System.out.print("\033[H\033[2J");
-      System.out.flush();
       System.out.println("You: " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
@@ -92,36 +101,14 @@ public class Main{
         switch (characterChoice) {
         case 1:
           System.out.println("You choose to fight " + enemeyName);
-          try {
-            Thread.sleep(2000);
-          } catch (Exception e) {
-            System.out.println(e);
-          }
-          printCharacterInfo();
-          System.out.println();
-          printEnemeyInfo();
+          Fighting();
           break;
         case 2:
-          if (runAwaySuccesOrNot()){
-            System.out.println("You run away from " + enemeyName);
-            break;
-          }
-          System.out.println(enemeyName+ " is faster than you");
-          System.out.println("Run away fail");
-          System.out.println("Prepare to fight!");
-          try {
-            System.out.println("3");
-            Thread.sleep(1000);
-            System.out.println("2");
-            Thread.sleep(1000);
-            System.out.println("1");
-            Thread.sleep(1000);
-          } catch (Exception e) {
-            System.out.println(e);
-          }
-          printCharacterInfo();
-          System.out.println();
-          printEnemeyInfo();
+         System.out.print("\033[H\033[2J");
+         System.out.flush();
+          if (RunAway())return;
+          Fighting();
+
           break;
 
         default:
@@ -142,6 +129,90 @@ public class Main{
       if ( player.getSpeed() > enemey.getSpeed()) return true;
       return false;
 
+    }
+
+    public static void printFightingMenu(){
+      System.out.println("\n");
+      System.out.println("1.Attack\t2.Defense\t3.Heal\t\t4.RunAway");
+
+    }
+    public static boolean RunAway(){
+
+          if (runAwaySuccesOrNot()){
+            System.out.println("You run away from " + enemey.getName());
+            return true;
+          }
+          System.out.println(enemey.getName() + " is faster than you");
+          System.out.println("Run away fail");
+          System.out.println("Prepare to fight!");
+          return false;
+    }
+    public static void getPlayerChoice(){
+      int playerChoice = 0;
+      while (playerChoice != 1 && playerChoice !=2 && playerChoice != 3 && playerChoice !=4){
+      System.out.printf(": ");
+      System.out.flush();
+      playerChoice = scanner.nextInt();
+      scanner.nextLine();
+      switch (playerChoice) {
+        case 1:
+          player.Attack(enemey);
+          printEnemeyInfo();
+          break;
+        case 2:
+          blockPass = player.BlockAttack();
+          break;
+        case 3:
+          player.GainHP();
+          printCharacterInfo();
+          break;
+        case 4:
+          RunAway();
+          break;
+
+        default:
+          break;
+      }
+     }
+    }
+    public static boolean checkIfPlayerDead(){
+      if (player.getHp() <= 0) return true;
+      return false;
+    }
+    public static void Fighting(){
+
+          try {
+            Thread.sleep(2000);
+          } catch (Exception e) {
+            System.out.println(e);
+          }
+          System.out.print("\033[H\033[2J");
+          System.out.flush();
+          printCharacterInfo();
+          System.out.println();
+          printEnemeyInfo();
+          while (enemey.getHp() > 0){
+          printFightingMenu();
+          getPlayerChoice();
+          if (enemey.getHp() <= 0){
+            System.out.println("You win!!!");
+            return;
+          }
+          System.out.println();
+          System.out.println();
+          System.out.println();
+          if (!blockPass){ enemey.Attack(player);
+
+          System.out.println(enemey.getName() + " is attacking you!");
+            }
+          System.out.println();
+          System.out.println();
+          printCharacterInfo();
+          if (checkIfPlayerDead()){
+            System.out.println("You died");
+            return;
+          }
+          }
     }
 }
 
