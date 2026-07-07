@@ -45,6 +45,7 @@ public class Main{
       characterChoice = scanner.nextInt();
       scanner.nextLine();
         }
+      characterChoice = 0;
     }
 
     public static void confirmCharacter(int characterChoice){
@@ -73,6 +74,8 @@ public class Main{
       System.out.println("You encounter " + enemeyName);
     }
     public static void fightOrFlight(String enemeyName){
+      while (characterChoice != 1 && characterChoice != 2) {
+        
       System.out.println("1.Fight");
       System.out.println("2.Run");
       System.out.printf(": ");
@@ -90,6 +93,7 @@ public class Main{
           break;
       }
 
+      }
     }
     public static void printEnemeyInfo()
     {
