@@ -13,7 +13,10 @@ public class Main{
   static Character player;
   static Character enemey;
   static boolean blockPass;
+  static Random random = new Random();
+  static int lastEnemy = -1;
   public static void main(String[] args){
+    boolean running = true;
 
     welcomeMessage();
     chooseCharacter();
@@ -21,22 +24,25 @@ public class Main{
     System.out.print("\033[H\033[2J");
     System.out.flush();
     printCharacterInfo();
-    try{
-    Thread.sleep(2000);
-    }
-    catch (InterruptedException e){
-      System.out.println(e);
-    }
-    randomEnemey();
-    fightOrFlight(enemey.getName());
-    try{
-    Thread.sleep(2000);
-    }
-    catch (InterruptedException e){
-      System.out.println(e);
-    }
-    
 
+    while(running){
+    try{
+    Thread.sleep(2000);
+    }
+    catch (InterruptedException e){
+      System.out.println(e);
+    }
+
+    randomEnemy();
+    fightOrFlight(enemey.getName());
+    if (!checkIfPlayerDead()){
+    System.out.printf("Q to quit\nY to continue\n: ");
+    if (scanner.nextLine().charAt(0) == 'q' || scanner.nextLine().charAt(0) == 'Q'){
+      running = false;
+    }}
+    if (checkIfPlayerDead()) break;
+     
+  }
 
 
 
@@ -83,7 +89,7 @@ public class Main{
       System.out.println("Attack: " + player.getAttack());
       System.out.println("Speed: " + player.getSpeed());
     }
-    public static void meetEnemey(String enemeyName, int enemeyHP, int enemyAttack, int enemySpeed){
+    public static void meetEnemy(String enemeyName, int enemeyHP, int enemyAttack, int enemySpeed){
       System.out.print("\033[H\033[2J");
       System.out.flush();
       System.out.println("You encounter " + enemeyName);
@@ -215,17 +221,23 @@ public class Main{
           }
           }
     }
-    public static void randomEnemey(){
-      Random random = new Random();
-      switch (random.nextInt(3)) {
+    public static void randomEnemy(){
+      int a;
+
+      do{
+        a = random.nextInt(3);
+      }while ( a == lastEnemy);
+      lastEnemy = a;
+
+      switch (a) {
         case 0:
-          meetEnemey("N-Daguva-Zeba", 3000, 20, 50);
+          meetEnemy("N-Daguva-Zeba", 3000, 20, 50);
           break;
         case 1:
-          meetEnemey("Shadow Moon", 2000, 10, 25);
+          meetEnemy("Shadow Moon", 2000, 10, 25);
           break;
         case 2:
-          meetEnemey("Decade the destroyer of the worlds", 1000, 5, 10);
+          meetEnemy("Decade the destroyer of the worlds", 1000, 5, 10);
 
       }
 
