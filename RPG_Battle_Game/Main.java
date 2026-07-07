@@ -1,15 +1,19 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class Main{
 
 
   static Scanner scanner = new Scanner(System.in);
   static int characterChoice = 0;
+  static Character player;
   public static void main(String[] args){
 
     welcomeMessage();
     chooseCharacter();
     confirmCharacter(characterChoice);
+    printCharacterInfo();
 
 
 
@@ -37,12 +41,23 @@ public class Main{
     public static void confirmCharacter(int characterChoice){
       switch (characterChoice) {
         case 1:
-          
+          player = new Character("Iroha", 100, 20);
           break;
+        case 2:
+          player = new Character("Kaguya", 200, 10);
+          break;
+        case 3:
+          player = new Character("Yachiyo", 50, 50);
 
         default:
           break;
       }
+    }
+    public static void printCharacterInfo(){
+
+      System.out.println("You choosed " + player.getName());
+      System.out.println("HP: " + player.getHp());
+      System.out.println("Attack: " + player.getAttack());
     }
 }
 
