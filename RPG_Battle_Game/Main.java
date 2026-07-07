@@ -96,8 +96,10 @@ public class Main{
           }
           printCharacterInfo();
           printEnemeyInfo();
-          
           break;
+        case 2:
+          System.out.println("You run away from " + enemeyName);
+          runAwaySuccesOrNot();
 
         default:
           break;
@@ -106,9 +108,13 @@ public class Main{
     }
     public static void printEnemeyInfo()
     {
-      System.out.println("Enemy" + enemey.getName());
+      System.out.println("Enemy: " + enemey.getName());
       System.out.println("HP: " + enemey.getHp());
       System.out.println("Attack: " + enemey.getAttack());
+
+    }
+
+    public static boolean runAwaySuccesOrNot(){
 
     }
 }
