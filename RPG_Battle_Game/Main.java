@@ -45,7 +45,6 @@ public class Main{
       characterChoice = scanner.nextInt();
       scanner.nextLine();
         }
-      characterChoice = 0;
     }
 
     public static void confirmCharacter(int characterChoice){
@@ -62,6 +61,7 @@ public class Main{
         default:
           break;
       }
+      characterChoice = 0;
     }
     public static void printCharacterInfo(){
       System.out.print("\033[H\033[2J");
