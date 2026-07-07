@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Random;
 
 
 
@@ -26,7 +27,7 @@ public class Main{
     catch (InterruptedException e){
       System.out.println(e);
     }
-    meetEnemey("N-Daguva-Zeba", 2000, 20, 50);
+    randomEnemey();
     fightOrFlight(enemey.getName());
     try{
     Thread.sleep(2000);
@@ -34,7 +35,6 @@ public class Main{
     catch (InterruptedException e){
       System.out.println(e);
     }
-    // meetEnemey("", enemeyHP, enemyAttack, enemySpeed);
     
 
 
@@ -214,6 +214,22 @@ public class Main{
             return;
           }
           }
+    }
+    public static void randomEnemey(){
+      Random random = new Random();
+      switch (random.nextInt(3)) {
+        case 0:
+          meetEnemey("N-Daguva-Zeba", 3000, 20, 50);
+          break;
+        case 1:
+          meetEnemey("Shadow Moon", 2000, 10, 25);
+          break;
+        case 2:
+          meetEnemey("Decade the destroyer of the worlds", 1000, 5, 10);
+
+      }
+
+
     }
 }
 
