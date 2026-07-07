@@ -23,7 +23,7 @@ public class Main{
     catch (InterruptedException e){
       System.out.println(e);
     }
-    meetEnemey("N-Daguva-Zeba", 1000, 20);
+    meetEnemey("N-Daguva-Zeba", 1000, 20, 50);
     fightOrFlight("N-Daguva-Zeba");
     
 
@@ -53,13 +53,13 @@ public class Main{
     public static void confirmCharacter(int characterChoice){
       switch (characterChoice) {
         case 1:
-          player = new Character("Iroha", 100, 20);
+          player = new Character("Iroha", 100, 20, 50);
           break;
         case 2:
-          player = new Character("Kaguya", 200, 10);
+          player = new Character("Kaguya", 200, 10, 20);
           break;
         case 3:
-          player = new Character("Yachiyo", 50, 50);
+          player = new Character("Yachiyo", 50, 50, 100);
           break;
 
         default:
@@ -72,10 +72,13 @@ public class Main{
       System.out.println("You: " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
+      System.out.println("Speed: " + player.getSpeed());
     }
-    public static void meetEnemey(String enemeyName, int enemeyHP, int enemyAttack){
+    public static void meetEnemey(String enemeyName, int enemeyHP, int enemyAttack, int enemySpeed){
+      System.out.print("\033[H\033[2J");
+      System.out.flush();
       System.out.println("You encounter " + enemeyName);
-      enemey = new Character(enemeyName, enemeyHP, enemyAttack);
+      enemey = new Character(enemeyName, enemeyHP, enemyAttack, enemySpeed);
     }
     public static void fightOrFlight(String enemeyName){
       characterChoice = 0;
@@ -95,11 +98,31 @@ public class Main{
             System.out.println(e);
           }
           printCharacterInfo();
+          System.out.println();
           printEnemeyInfo();
           break;
         case 2:
-          System.out.println("You run away from " + enemeyName);
-          runAwaySuccesOrNot();
+          if (runAwaySuccesOrNot()){
+            System.out.println("You run away from " + enemeyName);
+            break;
+          }
+          System.out.println(enemeyName+ " is faster than you");
+          System.out.println("Run away fail");
+          System.out.println("Prepare to fight!");
+          try {
+            System.out.println("3");
+            Thread.sleep(1000);
+            System.out.println("2");
+            Thread.sleep(1000);
+            System.out.println("1");
+            Thread.sleep(1000);
+          } catch (Exception e) {
+            System.out.println(e);
+          }
+          printCharacterInfo();
+          System.out.println();
+          printEnemeyInfo();
+          break;
 
         default:
           break;
@@ -111,10 +134,13 @@ public class Main{
       System.out.println("Enemy: " + enemey.getName());
       System.out.println("HP: " + enemey.getHp());
       System.out.println("Attack: " + enemey.getAttack());
+      System.out.println("Speed: " + enemey.getSpeed());
 
     }
 
     public static boolean runAwaySuccesOrNot(){
+      if ( player.getSpeed() > enemey.getSpeed()) return true;
+      return false;
 
     }
 }

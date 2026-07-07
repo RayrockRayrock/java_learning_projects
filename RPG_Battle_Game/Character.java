@@ -2,13 +2,16 @@ class Character{
   private String name;
   private int hp;
   private int attack;
+  private int speed;
 
 
-  Character(String name, int hp, int attack){
+  Character(String name, int hp, int attack,int speed){
     this.name = name;
     this.hp = hp;
     this.attack = attack;
+    this.speed = speed;
   }
+
 
 
   public String getName(){
@@ -19,6 +22,9 @@ class Character{
   }
   public int getAttack(){
     return attack;
+  }
+  public int getSpeed(){
+    return speed;
   }
 
 
