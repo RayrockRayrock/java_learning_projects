@@ -57,11 +57,11 @@ public class Main{
           break;
         case 3:
           player = new Character("Yachiyo", 50, 50);
+          break;
 
         default:
           break;
       }
-      characterChoice = 0;
     }
     public static void printCharacterInfo(){
       System.out.print("\033[H\033[2J");
@@ -69,6 +69,7 @@ public class Main{
       System.out.println("You: " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
+      characterChoice = 0;
     }
     public static void meetEnemey(String enemeyName){
       System.out.println("You encounter " + enemeyName);
@@ -76,12 +77,12 @@ public class Main{
     public static void fightOrFlight(String enemeyName){
       while (characterChoice != 1 && characterChoice != 2) {
         
-      System.out.println("1.Fight");
-      System.out.println("2.Run");
-      System.out.printf(": ");
-      characterChoice = scanner.nextInt();
-      scanner.nextLine();
-      switch (characterChoice) {
+        System.out.println("1.Fight");
+        System.out.println("2.Run");
+        System.out.printf(": ");
+        characterChoice = scanner.nextInt();
+        scanner.nextLine();
+        switch (characterChoice) {
         case 1:
           System.out.println("You choose to fight " + enemeyName);
           printCharacterInfo();
@@ -91,8 +92,7 @@ public class Main{
 
         default:
           break;
-      }
-
+        }
       }
     }
     public static void printEnemeyInfo()
