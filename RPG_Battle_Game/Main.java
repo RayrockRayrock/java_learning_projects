@@ -205,6 +205,7 @@ public class Main{
 
           System.out.println(enemey.getName() + " is attacking you!");
             }
+          blockPass = false;
           System.out.println();
           System.out.println();
           printCharacterInfo();
