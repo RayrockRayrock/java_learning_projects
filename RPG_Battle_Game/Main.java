@@ -21,6 +21,7 @@ public class Main{
       System.out.println(e);
     }
     meetEnemey("N-Daguva-Zeba");
+    fightOrFlight("N-Daguva-Zeba");
     
 
 
@@ -64,12 +65,34 @@ public class Main{
     public static void printCharacterInfo(){
       System.out.print("\033[H\033[2J");
       System.out.flush();
-      System.out.println("You choosed " + player.getName());
+      System.out.println("You: " + player.getName());
       System.out.println("HP: " + player.getHp());
       System.out.println("Attack: " + player.getAttack());
     }
     public static void meetEnemey(String enemeyName){
       System.out.println("You encounter " + enemeyName);
+    }
+    public static void fightOrFlight(String enemeyName){
+      System.out.println("1.Fight");
+      System.out.println("2.Run");
+      System.out.printf(": ");
+      characterChoice = scanner.nextInt();
+      scanner.nextLine();
+      switch (characterChoice) {
+        case 1:
+          System.out.println("You choose to fight " + enemeyName);
+          printCharacterInfo();
+          printEnemeyInfo();
+          
+          break;
+
+        default:
+          break;
+      }
+
+    }
+    public static void printEnemeyInfo()
+    {
 
     }
 }
